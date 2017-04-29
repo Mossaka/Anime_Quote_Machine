@@ -29,6 +29,7 @@ $(document).ready(function() {
 
 			var randInt = Math.floor(Math.random() * data['quotes'].length)
 			var quoteObj = data['quotes'][randInt]
+
 			var anime = quoteObj.anime
 			var author = quoteObj.author
 			var quote = quoteObj.quote
