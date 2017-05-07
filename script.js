@@ -40,7 +40,7 @@ $(document).ready(function() {
 			$('#anime').text(anime);
 			$('.btnTweet').attr('href', "https://twitter.com/intent/tweet?text=" + sQuote);
 
-            keyword = anime;
+            keyword = author;
 
             /*$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
                 {
@@ -71,8 +71,26 @@ $(document).ready(function() {
                 data: ""
             })
                 .done(function(data) {
-                	var image_src = data.value[0].contentUrl;
-                    $('body').css('background-image', "url('" + image_src + "')");
+                	var length = data.value.length;
+                	var image_src, image_src_height, image_src_width;
+                	for(var i = 0; i < length; i ++ ) {
+                		if(data.value[i].height <= 1000 && data.value[i].width < 1000) {
+                			image_src = data.value[i].contentUrl;
+                			image_src_height = data.value[i].height;
+                			image_src_width = data.value[i].width;
+
+                            console.log("height:" + data.value[i].height);
+                            console.log("width: " + data.value[i].width);
+                			break;
+						}
+					}
+                	//var image_src = data.value[0].contentUrl;
+                	//var image_src_height = data.value[0].height;
+                    //var image_src_width = data.value[0].width;
+                    $('.bg_blur').css('background-image', "url('" + image_src + "')");
+                    $('.bg_blur').css('height',image_src_height);
+                    $('.bg_blur').css('width',image_src_width);
+                    //$('.bg_blur').backgroundBlur(image_src);
                 })
                 .fail(function() {
                     alert("error");
